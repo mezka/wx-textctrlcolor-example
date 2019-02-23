@@ -36,7 +36,7 @@ class Frame(wx.Frame):
     def _doLayout(self):
         hSizer = wx.BoxSizer(wx.HORIZONTAL)
         vSizer = wx.BoxSizer(wx.VERTICAL)
-        vSizer.Add(wx.StaticText(self, label="Click to change textCtrl color"), flag=wx.ALIGN_CENTER|wx.ALL, border=10)
+        vSizer.Add(wx.StaticText(self, label="Test changing the textCtrl color"), flag=wx.ALIGN_CENTER|wx.ALL, border=10)
         vSizer.Add(self.textCtrl, flag=wx.ALIGN_CENTER|wx.ALL, border=10)
         vSizer.Add(self.changeColorBtn, flag=wx.ALIGN_CENTER|wx.ALL, border=10)
         vSizer.Add(self.resetColorBtn, flag=wx.ALIGN_CENTER|wx.ALL, border=10)
