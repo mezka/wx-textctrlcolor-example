@@ -1,5 +1,7 @@
 import wx
+import wx.adv
 from functools import partial
+from itertools import cycle
 import random
 
 class Frame(wx.Frame):
@@ -7,9 +9,12 @@ class Frame(wx.Frame):
     def __init__(self, *args, **kw):
         super(Frame, self).__init__(*args, **kw)
 
-        self.Panel = Panel(self)
+        self._makeMenuBar()
         self.CreateStatusBar()
         self.SetStatusText("This is an example program...")
+
+        self.Panel = Panel(self)
+       
 
     def _makeMenuBar(self):
         fileMenu = wx.Menu()
@@ -42,6 +47,9 @@ class Frame(wx.Frame):
 class Panel(wx.Panel):
     def __init__(self, *args, **kw):
         super(Panel, self).__init__(*args, **kw)
+
+        self.colors = cycle([wx.RED, wx.BLUE, wx.GREEN])
+
         self.textCtrl = wx.TextCtrl(self)
         self.changeColorBtn = wx.Button(self, label="Change color")
         self.resetColorBtn = wx.Button(self, label="Reset color")
@@ -62,10 +70,11 @@ class Panel(wx.Panel):
         self.SetSizerAndFit(hSizer)
     
     def onChangeColor(self, event, target):
-        colors = [wx.RED, wx.BLUE, wx.GREEN]
 
-        target.BackgroundColour = random.choice(colors)
+        target.BackgroundColour = next(self.colors)
         target.ForegroundColour = wx.WHITE
+
+        target.Refresh() #Needed in Windows platform in order to update color automatically
 
     def onResetColor(self, event, target):
         target.BackgroundColour = wx.NullColour
